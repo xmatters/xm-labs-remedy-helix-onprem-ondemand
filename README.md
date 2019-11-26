@@ -81,20 +81,31 @@ The closed loop integration annotates the incident work info with xMatters event
 | XMATTERS_INCIDENT_IB_FLOW_PATH  | Inbound Integration path (URL Authentication) to Step 01                 |
 
 ### Get the XMATTERS_INCIDENT_EVENT_IB_PATH  
-* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.0** then select *Integration Builder*
+* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.0** then click *Integration Builder*
 * Click the *3 Configured* link for *Inbound Integrations*
 * Click the *Step 02 | Create Event | Incident Alert | Flow* link
 * Scroll to the **How to trigger the integration** section then click *Select method* and *Basic Authentication* and click *Copy* to copy the URL
 * Be sure to remove everything before */api/integration* after pasting in the Constant
 
 ### Get the XMATTERS_INCIDENT_IB_FLOW_PATH  
-* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.0** then select *Integration Builder*
+* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.0** then click *Integration Builder*
 * Click the *3 Configured* link for *Inbound Integrations*
 * Click the *Step 01 | Inbound Request | JSON* link
 * Scroll to the **How to trigger the integration** section then click *Select method* and *URL Authentication* 
 * In *Authenticating User* begin typing the username for the REST integration user in xMatters and select the user
 * Click *Copy* to copy the URL
 * Be sure to remove everything before */api/integration* after pasting in the Constant
+
+### Verify Flow Designer steps
+Some Flow Designer steps are configured with a *Run Location* of either *Cloud* for Remedy On-Demand or Helix On-Demand or *xMatters Agent* for Remedy On-Premise 
+* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.0** then click *Flows*
+* Click **Incident Alerts Workflow**
+* Verify the *Run Location* for all steps on the Flow Designer canvas with labels as identified below:
+   Add Assignee | Incident | JWT Auth
+   Add Work Info | Incident | JWT Auth
+   Get Incident | JWT Auth
+   Remedy API Token | Acquire
+   Remedy API Token | Release
 
 ## Remedy/Helix set up
 Configuring BMC Remedy or Helix to integrate with xMatters requires the following steps:
