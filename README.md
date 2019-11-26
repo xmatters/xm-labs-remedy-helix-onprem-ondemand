@@ -7,7 +7,7 @@ Notify on-call response teams when critical incidents are reported in Remedy or 
 * xMatters account - If you don't have one, [get one](https://www.xmatters.com)!
 
 # Files
-[BMCRemedyHelixIncident70.zip](BMCRemedyHelixIncident70.zip) - download this Workflow to get started  
+[BMCRemedyandHelixIncident70.zip](BMCRemedyandHelixIncident70.zip) - download this Workflow to get started  
 [BMCRemedyHelix_defn.zip](BMCRemedyHelix_defn.zip) - download this zip file containing the BMC Remedy/Helix workflow definition files
 
 # How it works
