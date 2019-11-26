@@ -100,7 +100,7 @@ The closed loop integration annotates the incident work info with xMatters event
 Some Flow Designer steps are configured with a *Run Location* of either *Cloud* for Remedy On-Demand or Helix On-Demand or *xMatters Agent* for Remedy On-Premise 
 * On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.0** then click *Flows*
 * Click **Incident Alerts Workflow**
-* Verify the *Run Location* for all steps on the Flow Designer canvas with labels as identified below:
+* Verify the *Run Location* for all steps on the Flow Designer canvas with labels as identified below:  
    Add Assignee | Incident | JWT Auth  
    Add Work Info | Incident | JWT Auth  
    Get Incident | JWT Auth  
