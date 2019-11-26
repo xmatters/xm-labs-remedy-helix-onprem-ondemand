@@ -31,7 +31,7 @@ The closed loop integration annotates the incident work info with xMatters event
 * Select the OS of the server from the drop-down list
 * Click **Download this version**
 * Choose a proxy configuration
-* Follow the steps shown in Step 3
+* Follow the instructions provided in Step 3
 * The xMatters Agent will be installed on the server and the service will automatically start
 
 ### Import the Workflow
