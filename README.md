@@ -11,7 +11,7 @@ Notify on-call response teams when critical incidents are reported in Remedy or 
 [BMCRemedyHelix_defn.zip](BMCRemedyHelix_defn.zip) - download this zip file containing the BMC Remedy/Helix workflow definition files
 
 # How it works
-Remedy/Helix triggers one of the xMatters filters as part of the integration. The filter POSTs the Remedy/Helix Incident ID to xMatters, and in turn xMatters uses a Remedy/Helix REST API to obtain the incident properties and subsequently creates the xMatters Event targeted to the assigned resolver Group.
+Remedy/Helix triggers one of the xMatters filters as part of the integration. The filter POSTs the Remedy/Helix Incident ID to xMatters, and in turn xMatters uses a Remedy/Helix REST API to get the incident properties and subsequently creates the xMatters Event targeted to the assigned resolver Group.
 
 The notified resolver responds with Assign to me - to take ownership of the incident or Escalate - to escalate to the next resource in the on call schedule.
 
