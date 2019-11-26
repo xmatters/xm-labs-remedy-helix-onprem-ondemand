@@ -27,7 +27,7 @@ The closed loop integration annotates the incident work info with xMatters event
 </kbd>  
 
 ### Install xMatters Agent for integration with Remedy On-Premise
-* On the Remedy/Helix Mid-Tier Server where the xMatters Agent is to be installed, in xMatters on the *Workflows* page in the left navigation bar click *Agents*
+* On the Remedy Mid-Tier Server where the xMatters Agent is to be installed, in xMatters on the *Workflows* page in the left navigation bar click *Agents*
 * Select the OS of the server from the drop-down list
 * Click *Download this version*
 * Choose a proxy configuration
