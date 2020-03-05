@@ -61,8 +61,7 @@ The closed loop integration annotates the incident work info with xMatters event
    Urgency  
    VIP
 
-### FOR REMEDY/HELIX V19.02 (Remedy/Helix SOAP/XML outbound) ONLY
-#### Configure xMatters Flow for Inbound SOAP/XML
+### Configure xMatters Flow for Inbound SOAP/XML - for Remedy/Helix v19.02 ONLY
 * On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Flows**
 * Click **Incident Alerts Workflow**
 * On the canvas, disable the step **Step 01 | Helix | Inbound Request | JSON**
