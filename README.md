@@ -3,11 +3,12 @@ Notify on-call response teams when critical incidents are reported in Remedy or 
 
 # Pre-Requisites
 * Version 19.08 or later of Remedy (On-Premise or On-Demand) or Helix (On-Demand)
+* Note, this integration version includes support for version 19.02 which POSTs to xMatters using SOAP/XML 
 * Account in Remedy or Helix
 * xMatters account - If you don't have one, [get one](https://www.xmatters.com)!
 
 # Files
-[BMCRemedyandHelixIncident70.zip](BMCRemedyandHelixIncident70.zip) - download this Workflow to get started  
+[BMCRemedyandHelixIncident70.zip](BMCRemedyandHelixIncident71.zip) - download this Workflow to get started  
 [BMCRemedyHelix_defn.zip](BMCRemedyHelix_defn.zip) - download this zip file containing the BMC Remedy/Helix workflow definition files
 
 # How it works
@@ -35,17 +36,17 @@ The closed loop integration annotates the incident work info with xMatters event
 * The xMatters Agent will be installed on the server and the service will automatically start
 
 ### Import the Workflow
-* Import the **BMC Remedy and Helix | Incident | 7.0** (BMCRemedyHelixIncident70.zip) Workflow     https://help.xmatters.com/ondemand/xmodwelcome/workflows/manage-workflows.htm
+* Import the **BMC Remedy and Helix | Incident | 7.1** (BMCRemedyHelixIncident71.zip) Workflow     https://help.xmatters.com/ondemand/xmodwelcome/workflows/manage-workflows.htm
 
 ### Assign permissions to the Workflow and Form  
-* On the *Workflows* page, click the Edit drop-down menu for the **BMC Remedy and Helix | Incident | 7.0** then select **Editor Permissions**
+* On the *Workflows* page, click the Edit drop-down menu for the **BMC Remedy and Helix | Incident | 7.1** then select **Editor Permissions**
 * Add any users, groups and/or roles to have editor permissions to this workflow
-* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.0** then click **Forms**
+* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Forms**
 * Click the **Web Service** drop-down menu for the **Incident Alerts** form
 * Select **Sender Permissions** then add the REST integration user
 
 ### Configure List Property Values  
-* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.0** then click **Properties**
+* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Properties**
 * Verify/Edit the values in the following list properties:  
    Company  
    Contact Sensitivity  
@@ -60,52 +61,67 @@ The closed loop integration annotates the incident work info with xMatters event
    Urgency  
    VIP
 
-### Configure Integration Builder Constants and Endpoints  
-* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.0** then click **Integration Builder**
-* Click **Edit Endpoints**
-* For the xMatters endpoint, in **Assign Endpoint** add the REST integration user then **Save Changes**
-* For the Remedy JWT endpoint, type the **Base URL** for the Remedy environment then **Save Changes**
-* For the Remedy Token endpoint, type the **Base URL** for the Remedy environment, type the integration user in Remedy in **Username**, click **Change Password** then type the password, select **Preemptive** and then **Save Changes**
-* For the xMatters Basic endpoint, type the **Base URL** for the xMatters environment, type the REST integration user in xMatters in **Username**, click **Change Password** then type the password, select **Preemptive** and then **Save Changes**
-* **Close** Edit Endpoints  
-* Click **Edit Constants**, then edit these constants:
+### FOR REMEDY/HELIX V19.02 (Remedy/Helix SOAP/XML outbound) ONLY
+#### Configure xMatters Flow for Inbound SOAP/XML
+* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Flows**
+* Click **Incident Alerts Workflow**
+* On the canvas, disable the step **Step 01 | Helix | Inbound Request | JSON**
+* Delete the hop from **Step 01 | Helix | Inbound Request | JSON** to the **Action** Switch step
+* Enable the step **Step 01 | Helix | Inbound Request | XML**
+* Connect the **Step 01 | Helix | Inbound Request | XML** to the **Action** Switch step
+* Edit the **Action** Switch step, in **Property** select *Step 01 | Helix Inbound Request | XML.Action* then click **Done**
+* Edit the following steps to correct the input mappings:  
+   Helix | Get Incident | JWT Auth  
+   Get Events  
+   Helix | Prepare Trigger | Incident  
+   Helix | Add Work Info | Incident | JWT Auth
+* **Save** the Flow
+
+### Configure Endpoints and Constants  
+* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Flows**
+* Click **Incident Alerts Workflow**
+* Click the **Components** drop-down button in the upper right then select **Endpoints**
+* For the Remedy JWT endpoint, type the **Base URL** for the Remedy/Helix environment, for example *https://customer-restapi.onbmc.com* then **Save** then **Close**
+* Click the **Components** drop-down button in the upper right then select **Constants**, then edit these constants:
    
-| Constant                        | Description                                                              |
-|:------------------------------- |:------------------------------------------------------------------------ |
-| REMEDY_FQDN                     | Fully qualified domain name of the Remedy/Helix Mid-Tier Server          |
-| REMEDY_OPT_SIMPLE_GROUP_NAME    | true to use simple group names or false to use Company*Org*Group         |
-| REMEDY_SERVER_NAME              | Remedy logical server name                                               |
-| USER_REMEDY_PASSWORD            | Password for the integration user in Remedy used for JWT authentication  |
-| USER_REMEDY_USERNAME            | Username for the integration user in Remedy used for JWT authentication  |
-| XMATTERS_INCIDENT_EVENT_IB_PATH | Inbound Integration path (Basic Authentication) to Step 02               |
-| XMATTERS_INCIDENT_IB_FLOW_PATH  | Inbound Integration path (URL Authentication) to Step 01                 |
+| Constant                        | Description                                                                      |
+|:------------------------------- |:-------------------------------------------------------------------------------- |
+| HELIX_FQDN                      | Fully qualified domain name of the Remedy/Helix Mid-Tier Server                  |
+| HELIX_OPT_SIMPLE_GROUP_NAME     | true to use simple group names or false to use Company*Org*Group                 |
+| HELIX_SERVER_NAME               | Remedy/Helix logical server name                                                 |
+| USER_HELIX_PASSWORD             | Password for the integration user in Remedy/Helix used for JWT authentication.   |
+| USER_HELIX_USERNAME             | Username for the integration user in Remedy/Helix used for JWT authentication    |
+| XMATTERS_INCIDENT_EVENT_IB_PATH | Inbound Integration path (URL Auth) to Step 02                                   |
+| XMATTERS_INCIDENT_IB_FLOW_PATH  | Inbound Integration path (URL Auth) to Step 01 (only reqd when using an xM Agent |
 
 ### Get the XMATTERS_INCIDENT_EVENT_IB_PATH  
-* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.0** then click **Integration Builder**
-* Click the **3 Configured** link for Inbound Integrations
+* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Integration Builder**
+* Click the **4 Configured** link for Inbound Integrations
 * Click the **Step 02 | Create Event | Incident Alert | Flow** link
-* Scroll to the **How to trigger the integration** section then click **Select method** and **Basic Authentication** and click **Copy** to copy the URL
-* Be sure to remove everything before `/api/integration` after pasting in the Constant
-
-### Get the XMATTERS_INCIDENT_IB_FLOW_PATH  
-* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.0** then click **Integration Builder**
-* Click the **3 Configured** link for Inbound Integrations
-* Click the **Step 01 | Inbound Request | JSON** link
 * Scroll to the **How to trigger the integration** section then click **Select method** and **URL Authentication** 
 * In **Authenticating User** begin typing the username for the REST integration user in xMatters and select the user
-* Click **Copy** to copy the URL
-* Be sure to remove everything before `/api/integration` after pasting in the Constant
+* Click **Copy** to copy the URL displayed in *Trigger*
+* Be sure to remove everything before `/api/integration/` after pasting in the Constant **XMATTERS_INCIDENT_EVENT_IB_PATH**
+
+### Get the XMATTERS_INCIDENT_IB_FLOW_PATH  
+* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Integration Builder**
+* Click the **4 Configured** link for Inbound Integrations
+* Click the **Step 01 | Helix Inbound Request | JSON** link
+* Scroll to the **How to trigger the integration** section then click **Select method** and **URL Authentication** 
+* In **Authenticating User** begin typing the username for the REST integration user in xMatters and select the user
+* Click **Copy** to copy the URL displayed in *Trigger*
+* Be sure to remove everything before `/api/integration/` after pasting in the Constant **XMATTERS_INCIDENT_IB_FLOW_PATH**
 
 ### Verify Flow Designer steps
 Some Flow Designer steps are configured with a **Run Location** of either **Cloud** for Remedy On-Demand or Helix On-Demand or **xMatters Agent** for Remedy On-Premise 
-* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.0** then click **Flows**
+* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Flows**
 * Click **Incident Alerts Workflow**
 * Verify the **Run Location** for all steps on the Flow Designer canvas with labels as identified below:  
-   Add Assignee | Incident | JWT Auth  
-   Add Work Info | Incident | JWT Auth  
-   Get Incident | JWT Auth  
-   Remedy API Token | Acquire  
-   Remedy API Token | Release  
+   Helix | Add Assignee | Incident | JWT Auth  
+   Helix | Add Work Info | Incident | JWT Auth  
+   Helix | Get Incident | JWT Auth  
+   Helix | API Token | Acquire  
+   Helix | API Token | Release  
 
 ## Remedy/Helix set up
 Configuring BMC Remedy or Helix to integrate with xMatters requires the following steps:
@@ -129,7 +145,7 @@ Configuring BMC Remedy or Helix to integrate with xMatters requires the followin
 Click **Finish**
 
 ### Configuring filters
-The integration includes a filter and an escalation that use the Set Fields action to consume a web service; these objects need their endpoints changed to the address of the Step 01 | Inbound Request | JSON inbound integration for On-Demand or the xMatters Agent for On-Premise.  
+The integration includes a filter and an escalation that use the Set Fields action to consume a web service; these objects need their endpoints changed to the address of the appropriate (JSON or XML) *Step 01 | Helix Inbound Request* inbound integration for On-Demand or to the address of the xMatters Agent for On-Premise.  
 Filter: XM:EI:EventInjection_100  
 Escalation: XM:Event Injection Retry
 
@@ -137,7 +153,7 @@ Escalation: XM:Event Injection Retry
 Follow the instructions above for *Get the XMATTERS_INCIDENT_IB_FLOW_PATH*. Paste the full URL in the Remedy/Helix filter.
 
 #### For Remedy On-Premise, get the endpoint URL for the xMatters Agent
-* On the Workflows page, click the **BMC Remedy and Helix | Incident | 7.0** then click **Integration Builder**
+* On the Workflows page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Integration Builder**
 * Click the **3 Configured** link for Inbound Integrations
 * Click the **Step 00 | Incoming Remedy | xM Agent** link
 * In **Integration Settings** *Step 1*, select **xMatters Agent** in **Location** and select the appropriate Agent
@@ -151,7 +167,7 @@ Follow the instructions above for *Get the XMATTERS_INCIDENT_IB_FLOW_PATH*. Past
 The integration requires a dedicated ITSM user to interact with incidents.
 
 #### Create an ITSM user
-First, create a new ITSM user with the Incident Master role in BMC Remedy/helix; the user does not need to be Support Staff.
+First, create a new ITSM user with the Incident Master role in BMC Remedy/Helix; the user does not need to be Support Staff.
 
 <kbd>
   <img src="media/RODITSMUser.png">
@@ -194,8 +210,8 @@ To allow xMatters to control assignments, you must turn off the automatic assign
 # Testing
 
 ## Triggering a notification
-To trigger a notification, create a new incident with a priority of High or Critical in BMC Remedy, and assign it to
-a user or group that exists in both BMC Remedy and xMatters:  
+To trigger a notification, create a new incident with a priority of High or Critical in BMC Remedy/Helix, and assign it to
+a user or group that exists in both BMC Remedy/Helix and xMatters:  
 
 <kbd>
   <img src="media/RODTriggerNotification.png">
