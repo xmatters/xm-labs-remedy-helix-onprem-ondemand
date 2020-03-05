@@ -36,14 +36,14 @@ The closed loop integration annotates the incident work info with xMatters event
 * The xMatters Agent will be installed on the server and the service will automatically start
 
 ### Import the Workflow
-* Import the **BMC Remedy and Helix | Incident | 7.1** (BMCRemedyHelixIncident71.zip) Workflow     https://help.xmatters.com/ondemand/xmodwelcome/workflows/manage-workflows.htm
+* Import the **BMC Remedy and Helix | Incident | 7.1** (BMCRemedyandHelixIncident71.zip) Workflow     https://help.xmatters.com/ondemand/xmodwelcome/workflows/manage-workflows.htm
 
 ### Assign permissions to the Workflow and Form  
 * On the *Workflows* page, click the Edit drop-down menu for the **BMC Remedy and Helix | Incident | 7.1** then select **Editor Permissions**
 * Add any users, groups and/or roles to have editor permissions to this workflow
 * On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Forms**
 * Click the **Web Service** drop-down menu for the **Incident Alerts** form
-* Select **Sender Permissions** then add the REST integration user
+* Select **Sender Permissions** then add the xMatters REST integration user
 
 ### Configure List Property Values  
 * On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Properties**
@@ -86,7 +86,7 @@ The closed loop integration annotates the incident work info with xMatters event
 | Constant                        | Description                                                                       |
 |:------------------------------- |:--------------------------------------------------------------------------------- |
 | HELIX_FQDN                      | Fully qualified domain name of the Remedy/Helix Mid-Tier Server                   |
-| HELIX_OPT_SIMPLE_GROUP_NAME     | true to use simple group names or false to use Company*Org*Group                  |
+| HELIX_OPT_SIMPLE_GROUP_NAME     | true to use simple group names or false to use Company\*Org\*Group                  |
 | HELIX_SERVER_NAME               | Remedy/Helix logical server name                                                  |
 | USER_HELIX_PASSWORD             | Password for the integration user in Remedy/Helix used for JWT authentication.    |
 | USER_HELIX_USERNAME             | Username for the integration user in Remedy/Helix used for JWT authentication     |
@@ -102,7 +102,7 @@ The closed loop integration annotates the incident work info with xMatters event
 * Click **Copy** to copy the URL displayed in *Trigger*
 * Be sure to remove everything before `/api/integration/` after pasting in the Constant **XMATTERS_INCIDENT_EVENT_IB_PATH**
 
-### Get the XMATTERS_INCIDENT_IB_FLOW_PATH  
+### Get the XMATTERS_INCIDENT_IB_FLOW_PATH (only required if using an xM Agent in the integration)  
 * On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Integration Builder**
 * Click the **4 Configured** link for Inbound Integrations
 * Click the **Step 01 | Helix Inbound Request | JSON** link
@@ -160,7 +160,7 @@ Escalation: XM:Event Injection Retry
 #### For Remedy/Helix On-Demand (v19.02), get the endpoint URL
 * On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Integration Builder**
 * Click the **4 Configured** link for Inbound Integrations
-* Click the **Step 01 | Helix Inbound Request | JSON** link
+* Click the **Step 01 | Helix Inbound Request | XML** link
 * Scroll to the **How to trigger the integration** section then click **Select method** and **URL Authentication** 
 * In **Authenticating User** begin typing the username for the REST integration user in xMatters and select the user
 * Click **Copy** to copy the URL displayed in *Trigger*
