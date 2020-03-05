@@ -8,7 +8,7 @@ Notify on-call response teams when critical incidents are reported in Remedy or 
 * xMatters account - If you don't have one, [get one](https://www.xmatters.com)!
 
 # Files
-[BMCRemedyandHelixIncident70.zip](BMCRemedyandHelixIncident71.zip) - download this Workflow to get started  
+[BMCRemedyandHelixIncident71.zip](BMCRemedyandHelixIncident71.zip) - download this Workflow to get started  
 [BMCRemedyHelix_defn.zip](BMCRemedyHelix_defn.zip) - download this zip file containing the BMC Remedy/Helix workflow definition files
 
 # How it works
@@ -83,15 +83,15 @@ The closed loop integration annotates the incident work info with xMatters event
 * For the Remedy JWT endpoint, type the **Base URL** for the Remedy/Helix environment, for example *https://customer-restapi.onbmc.com* then **Save** then **Close**
 * Click the **Components** drop-down button in the upper right then select **Constants**, then edit these constants:
    
-| Constant                        | Description                                                                      |
-|:------------------------------- |:-------------------------------------------------------------------------------- |
-| HELIX_FQDN                      | Fully qualified domain name of the Remedy/Helix Mid-Tier Server                  |
-| HELIX_OPT_SIMPLE_GROUP_NAME     | true to use simple group names or false to use Company*Org*Group                 |
-| HELIX_SERVER_NAME               | Remedy/Helix logical server name                                                 |
-| USER_HELIX_PASSWORD             | Password for the integration user in Remedy/Helix used for JWT authentication.   |
-| USER_HELIX_USERNAME             | Username for the integration user in Remedy/Helix used for JWT authentication    |
-| XMATTERS_INCIDENT_EVENT_IB_PATH | Inbound Integration path (URL Auth) to Step 02                                   |
-| XMATTERS_INCIDENT_IB_FLOW_PATH  | Inbound Integration path (URL Auth) to Step 01 (only reqd when using an xM Agent |
+| Constant                        | Description                                                                       |
+|:------------------------------- |:--------------------------------------------------------------------------------- |
+| HELIX_FQDN                      | Fully qualified domain name of the Remedy/Helix Mid-Tier Server                   |
+| HELIX_OPT_SIMPLE_GROUP_NAME     | true to use simple group names or false to use Company*Org*Group                  |
+| HELIX_SERVER_NAME               | Remedy/Helix logical server name                                                  |
+| USER_HELIX_PASSWORD             | Password for the integration user in Remedy/Helix used for JWT authentication.    |
+| USER_HELIX_USERNAME             | Username for the integration user in Remedy/Helix used for JWT authentication     |
+| XMATTERS_INCIDENT_EVENT_IB_PATH | Inbound Integration path (URL Auth) to Step 02                                    |
+| XMATTERS_INCIDENT_IB_FLOW_PATH  | Inbound Integration path (URL Auth) to Step 01 (only reqd when using an xM Agent) |
 
 ### Get the XMATTERS_INCIDENT_EVENT_IB_PATH  
 * On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Integration Builder**
