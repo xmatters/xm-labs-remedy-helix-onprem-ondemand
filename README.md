@@ -148,12 +148,27 @@ The integration includes a filter and an escalation that use the Set Fields acti
 Filter: XM:EI:EventInjection_100  
 Escalation: XM:Event Injection Retry
 
-#### For Remedy/Helix On-Demand, get the endpoint URL
-Follow the instructions above for *Get the XMATTERS_INCIDENT_IB_FLOW_PATH*. Paste the full URL in the Remedy/Helix filter.
+#### For Remedy/Helix On-Demand (v19.08 or later), get the endpoint URL
+* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Integration Builder**
+* Click the **4 Configured** link for Inbound Integrations
+* Click the **Step 01 | Helix Inbound Request | JSON** link
+* Scroll to the **How to trigger the integration** section then click **Select method** and **Basic Authentication** 
+* Click **Copy** to copy the URL displayed in *Trigger*
+* Paste the full URL as the endpoint in the Remedy/Helix filter
+* Add the xMatters REST integration user Username and Password in the Remedy/Helix filter
+
+#### For Remedy/Helix On-Demand (v19.02), get the endpoint URL
+* On the *Workflows* page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Integration Builder**
+* Click the **4 Configured** link for Inbound Integrations
+* Click the **Step 01 | Helix Inbound Request | JSON** link
+* Scroll to the **How to trigger the integration** section then click **Select method** and **URL Authentication** 
+* In **Authenticating User** begin typing the username for the REST integration user in xMatters and select the user
+* Click **Copy** to copy the URL displayed in *Trigger*
+* Paste the full URL as the endpoint in the Remedy/Helix filter
 
 #### For Remedy On-Premise, get the endpoint URL for the xMatters Agent
 * On the Workflows page, click the **BMC Remedy and Helix | Incident | 7.1** then click **Integration Builder**
-* Click the **3 Configured** link for Inbound Integrations
+* Click the **4 Configured** link for Inbound Integrations
 * Click the **Step 00 | Incoming Remedy | xM Agent** link
 * In **Integration Settings** *Step 1*, select **xMatters Agent** in **Location** and select the appropriate Agent
 * In *Step 3*, select **URL Authentication**
