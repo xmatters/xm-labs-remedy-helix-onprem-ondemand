@@ -182,7 +182,7 @@ The integration requires a dedicated ITSM user to interact with incidents.
 First, create a new ITSM user with the Incident Master role in BMC Remedy/Helix; the user does not need to be Support Staff.
 
 <kbd>
-  <img src="media/HelixAddApiUser.png">
+  <img src="media/RODITSMUser.png">
 </kbd>
 
 **Note: If you specify a Login ID of "xmatters" for this ITSM user, you can skip the following two update steps.**
