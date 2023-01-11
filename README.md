@@ -107,7 +107,7 @@ Some Flow Designer steps are configured with a **Run Location** of either **Clou
    Helix | Add Work Info | Incident  
    Helix | Get Incident  
 
-## Helix ITSM set up
+## BMC Helix ITSM set up
 Configuring BMC Helix ITSM to integrate with xMatters requires the following steps:
 
 * Import the workflow definition files
